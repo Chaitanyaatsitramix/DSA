@@ -9,7 +9,6 @@ func RemoveDuplicates(nums []int) int {
 	}
 
 	slow := 0 // Points to position of unique elements
-
 	for fast := 1; fast < len(nums); fast++ {
 		if nums[fast] != nums[slow] {
 			slow++
