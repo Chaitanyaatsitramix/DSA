@@ -108,65 +108,135 @@ This repository documents a comprehensive learning journey through fundamental D
   - Large tree processing
   - Embedded systems
 
+#### 10. KMP Algorithm
+**Prompt 11:** *"explain me what is KMP Algorithm and its methods with example"*
+- ✅ Pattern matching algorithm
+- ✅ Implementation details
+- ✅ Example applications
+
+#### 11. Dijkstra's Algorithm
+**Prompt 12:** *"explain me what is Dijkstra's Algorithm and its methods with example"*
+- ✅ Shortest path algorithm
+- ✅ Priority queue implementation
+- ✅ Graph traversal applications
+
+#### 12. Topological Sort Algorithm
+**Prompt 13:** *"explain me what is Topological Sort Algorithm and its methods with example"*
+- ✅ Directed acyclic graph sorting
+- ✅ Dependency resolution
+- ✅ Application examples
+
+#### 13. Trie Search Insert Algorithm
+**Prompt 14:** *"explain me what is Trie Search Insert Algorithm and its methods with example"*
+- ✅ Prefix tree implementation
+- ✅ Search and insert operations
+- ✅ String processing applications
+
+#### 14. Union-Find Algorithm
+**Prompt 15:** *"explain me what is Union-Find Algorithm and its methods with example"*
+- ✅ Disjoint set data structure
+- ✅ Union and find operations
+- ✅ Connected components applications
+
 ## Repository Structure
 
 ```
 DSA/
 ├── README.md                           # This comprehensive guide
 ├── go.mod                             # Go module configuration
-├── Binary_Search_Algorithm/           # Day 2 - Search Algorithms
-│   ├── Binary_Search_Algorithm.md     # Theoretical guide
-│   ├── binary_search.go              # Search implementations
+├── Binary_Search_Algorithm/           # Search Algorithms
+│   ├── Binary_Search_Algorithm.md     # Algorithm guide
+│   ├── binary_search.go              # Implementation
 │   └── binary_search_test.go         # Test suite
-├── Breadth_First_Search_Algorithm/    # Day 3 - Graph Traversal
-│   ├── Breadth_First_Search_Algorithm.md # Algorithm guide
-│   ├── bfs/                          # Core BFS package
-│   │   ├── bfs.go                    # BFS implementation
-│   │   └── bfs_test.go              # BFS tests
-│   ├── cmd/                          # Example programs
+├── Breadth_First_Search_Algorithm/    # Graph Traversal
+│   ├── Breadth_First_Search_Algorithm.md
+│   ├── bfs/
+│   │   ├── bfs.go
+│   │   └── bfs_test.go
+│   ├── cmd/
 │   │   └── bfs_demo/
-│   │       └── main.go              # Demo program
-│   └── go.mod                        # Module configuration
-├── Depth_First_Search_Algorithm/      # Day 3 - Graph Traversal
-│   ├── Depth_First_Search_Algorithm.md # Algorithm guide
-│   ├── dfs_implementation.go         # DFS implementation
-│   └── dfs_test.go                   # DFS tests
-├── Two_Pointer_algorithm/             # Day 1 - Pointer Techniques
-│   ├── Two_Pointer_algorithm.md      # Algorithm guide
-│   ├── go.mod                        # Module configuration
-│   ├── main.go                       # Example program
-│   ├── opposite_direction.go         # Two-pointer implementation
-│   └── same_direction.go             # Two-pointer implementation
-├── Sliding_Window_algorithm/          # Day 1 - Window Techniques
-│   ├── SLIDING_WINDOW.md             # Algorithm guide
-│   ├── go.mod                        # Module configuration
-│   ├── main.go                       # Example program
-│   ├── Fixed_Size_window.go          # Fixed window implementation
-│   └── Variable Size_Window.go       # Variable window implementation
-├── Merge_Intervals_Algorithm/         # Day 1 - Interval Processing
-│   ├── Merge_Intervals_Algorithm.md  # Algorithm guide
-│   ├── go.mod                        # Module configuration
-│   ├── main.go                       # Example program
-│   └── merge_intervals.go            # Implementation
-├── Kadane's_Algorithm/               # Day 1 - Dynamic Programming
-│   ├── KADANES_ALGORITHM.md          # Algorithm guide
-│   ├── go.mod                        # Module configuration
-│   ├── main.go                       # Example program
-│   └── kadanes_algorithm.go          # Implementation
-└── Quickselect_Algorithm/            # Day 3 - Selection Algorithm
-    ├── README.md                     # Algorithm guide
-    ├── go.mod                        # Module configuration
-    ├── quickselect.go               # Core implementation
-    └── examples/                    # Example programs
-        └── main.go                  # Demo program
-└── Inorder_Morris_Traversal_Algorithm/ # Day 3 - Tree Traversal
-    ├── README.md                     # Algorithm guide
-    ├── go.mod                        # Module configuration
-    ├── pkg/                         # Core package
-    │   └── binarytree/             # Binary tree implementation
-    │       └── binary_tree.go      # Morris traversal implementation
-    └── examples/                    # Example programs
-        └── main.go                  # Demo program
+│   │       └── main.go
+│   └── go.mod
+├── Depth_First_Search_Algorithm/      # Graph Traversal
+│   ├── Depth_First_Search_Algorithm.md
+│   ├── dfs_implementation.go
+│   └── dfs_test.go
+├── Dijkstra's_Algorithm/             # Shortest Path
+│   ├── README.md
+│   ├── go.mod
+│   ├── examples/
+│   │   └── main.go
+│   └── pkg/
+│       └── graph/
+│           ├── graph.go
+│           └── priority_queue.go
+├── Inorder_Morris_Traversal_Algorithm/ # Tree Traversal
+│   ├── README.md
+│   ├── go.mod
+│   ├── examples/
+│   │   └── main.go
+│   └── pkg/
+│       └── binarytree/
+│           └── binary_tree.go
+├── Kadane's_Algorithm/               # Dynamic Programming
+│   ├── KADANES_ALGORITHM.md
+│   ├── go.mod
+│   ├── main.go
+│   └── kadanes_algorithm.go
+├── KMP_Algorithm/                    # String Matching
+│   ├── README.md
+│   ├── go.mod
+│   ├── kmp.go
+│   └── examples/
+│       └── main.go
+├── Merge_Intervals_Algorithm/        # Interval Processing
+│   ├── Merge_Intervals_Algorithm.md
+│   ├── go.mod
+│   ├── main.go
+│   └── merge_intervals.go
+├── Quickselect_Algorithm/           # Selection Algorithm
+│   ├── README.md
+│   ├── go.mod
+│   ├── quickselect.go
+│   └── examples/
+│       └── main.go
+├── Sliding_Window_algorithm/        # Window Techniques
+│   ├── SLIDING_WINDOW.md
+│   ├── go.mod
+│   ├── main.go
+│   ├── Fixed_Size_window.go
+│   └── Variable_Size_Window.go
+├── Topological_Sort_Algorithm/      # Graph Algorithm
+│   ├── README.md
+│   ├── go.mod
+│   ├── examples/
+│   │   └── main.go
+│   └── pkg/
+│       └── graph/
+│           └── graph.go
+├── Trie_Search_Insert_Algorithm/    # Tree Data Structure
+│   ├── README.md
+│   ├── go.mod
+│   ├── examples/
+│   │   └── main.go
+│   └── pkg/
+│       └── trie/
+│           └── trie.go
+├── Two_Pointer_algorithm/          # Pointer Techniques
+│   ├── Two_Pointer_algorithm.md
+│   ├── go.mod
+│   ├── main.go
+│   ├── opposite_direction.go
+│   └── same_direction.go
+└── Union-Find_Algorithm/          # Disjoint Sets
+    ├── README.md
+    ├── go.mod
+    ├── examples/
+    │   └── main.go
+    └── pkg/
+        └── unionfind/
+            ├── array_unionfind.go
+            └── map_unionfind.go
 ```
 
 ## Key Learning Outcomes
@@ -180,6 +250,11 @@ DSA/
 - **Kadane's Algorithm**: O(n) dynamic programming approach
 - **Quickselect**: O(n) selection algorithm with deterministic variant
 - **Morris Traversal**: O(1) space tree traversal without recursion
+- **KMP Algorithm**: O(n + m) string pattern matching
+- **Dijkstra's Algorithm**: O((V + E)logV) shortest path finding
+- **Topological Sort**: O(V + E) DAG ordering
+- **Trie**: O(L) prefix tree operations
+- **Union-Find**: Near O(1) disjoint set operations
 
 ### 🧪 **Testing Excellence**
 - Comprehensive test coverage
