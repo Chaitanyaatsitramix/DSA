@@ -92,6 +92,22 @@ This repository documents a comprehensive learning journey through fundamental D
   - Finding median in unsorted array
   - Handling arrays with duplicates
 
+#### 9. Morris Traversal Algorithm
+**Prompt 10:** *"explain me what is Inorder_Morris_Traversal_Algorithm and its methods in Binary Tree with example"*
+- ✅ Space-efficient binary tree traversal:
+  - O(1) space complexity without recursion/stack
+  - Inorder traversal implementation
+  - Preorder traversal variation
+  - Thread creation and management
+- ✅ Example implementations:
+  - Simple binary tree traversal
+  - Complex tree processing
+  - Tree structure preservation
+- ✅ Applications:
+  - Memory-constrained systems
+  - Large tree processing
+  - Embedded systems
+
 ## Repository Structure
 
 ```
@@ -143,6 +159,14 @@ DSA/
     ├── quickselect.go               # Core implementation
     └── examples/                    # Example programs
         └── main.go                  # Demo program
+└── Inorder_Morris_Traversal_Algorithm/ # Day 3 - Tree Traversal
+    ├── README.md                     # Algorithm guide
+    ├── go.mod                        # Module configuration
+    ├── pkg/                         # Core package
+    │   └── binarytree/             # Binary tree implementation
+    │       └── binary_tree.go      # Morris traversal implementation
+    └── examples/                    # Example programs
+        └── main.go                  # Demo program
 ```
 
 ## Key Learning Outcomes
@@ -155,6 +179,7 @@ DSA/
 - **Merge Intervals**: O(n log n) interval processing
 - **Kadane's Algorithm**: O(n) dynamic programming approach
 - **Quickselect**: O(n) selection algorithm with deterministic variant
+- **Morris Traversal**: O(1) space tree traversal without recursion
 
 ### 🧪 **Testing Excellence**
 - Comprehensive test coverage
