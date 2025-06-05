@@ -8,113 +8,102 @@ import (
 func main() {
 	fmt.Println("=== Trie (Prefix Tree) Algorithm Demonstrations ===\n")
 
-	// Example 1: Dictionary Implementation
-	fmt.Println("Example 1: Dictionary Implementation")
-	fmt.Println("Building a dictionary with word lookup and prefix search")
+	// Example 1: Basic Word Dictionary
+	fmt.Println("Example 1: Basic Word Dictionary")
+	fmt.Println("Demonstrating basic word storage and retrieval")
 
-	// Create a new trie
 	dictionary := trie.NewTrie()
 
-	// Insert some words
-	words := []string{
-		"cat",
-		"catch",
-		"caught",
-		"dog",
-		"dogma",
-		"doing",
-		"done",
-		"zebra",
-	}
-
-	fmt.Println("\nInserting words:")
+	// Insert words
+	words := []string{"cat", "car", "cart", "dog", "done"}
+	fmt.Println("\nInserting words:", words)
 	for _, word := range words {
 		dictionary.Insert(word)
-		fmt.Printf("Inserted: %s\n", word)
 	}
 
 	// Search for words
 	fmt.Println("\nSearching for words:")
-	searchWords := []string{"cat", "catch", "dog", "zebra", "catchy", "do"}
+	searchWords := []string{"cat", "car", "cart", "dog", "do", "done", "cats"}
 	for _, word := range searchWords {
 		exists := dictionary.Search(word)
-		fmt.Printf("Word '%s' exists: %v\n", word, exists)
+		fmt.Printf("'%s' exists: %v\n", word, exists)
 	}
 
-	// Prefix search
-	fmt.Println("\nPrefix searches:")
-	prefixes := []string{"cat", "do", "z"}
+	// Check prefixes
+	fmt.Println("\nChecking prefixes:")
+	prefixes := []string{"ca", "do", "tr"}
 	for _, prefix := range prefixes {
-		words := dictionary.GetWordsWithPrefix(prefix)
-		fmt.Printf("Words with prefix '%s': %v\n", prefix, words)
-		fmt.Printf("Count of words with prefix '%s': %d\n", prefix, dictionary.GetCount(prefix))
+		hasPrefix := dictionary.StartsWith(prefix)
+		count := dictionary.CountPrefix(prefix)
+		fmt.Printf("Prefix '%s': exists=%v, word count=%d\n", prefix, hasPrefix, count)
+
+		if hasPrefix {
+			words := dictionary.FindAllWithPrefix(prefix)
+			fmt.Printf("Words with prefix '%s': %v\n", prefix, words)
+		}
 	}
 
-	// Example 2: Auto-complete System
-	fmt.Println("\nExample 2: Auto-complete System")
-	fmt.Println("Implementing an auto-complete feature")
+	// Example 2: Dictionary with Word Definitions
+	fmt.Println("\nExample 2: Dictionary with Word Definitions")
+	fmt.Println("Demonstrating storage of words with associated values")
 
-	// Create a new trie for auto-complete
-	autocomplete := trie.NewTrie()
+	definitionDict := trie.NewTrie()
 
-	// Insert programming language names
-	languages := []string{
-		"python",
-		"javascript",
-		"java",
-		"golang",
-		"ruby",
-		"rust",
-		"php",
-		"perl",
-		"scala",
-		"swift",
+	// Insert words with definitions
+	definitions := map[string]string{
+		"code":      "Instructions for a computer",
+		"coding":    "The process of writing computer programs",
+		"coder":     "Someone who writes code",
+		"algorithm": "A step-by-step procedure for calculations",
 	}
 
-	fmt.Println("\nBuilding auto-complete database:")
-	for _, lang := range languages {
-		autocomplete.Insert(lang)
-		fmt.Printf("Added: %s\n", lang)
+	fmt.Println("\nInserting words with definitions:")
+	for word, def := range definitions {
+		definitionDict.InsertWithValue(word, def)
+		fmt.Printf("Added: %s\n", word)
 	}
 
-	// Demonstrate auto-complete
-	prefixes = []string{"p", "ja", "go", "r"}
-	fmt.Println("\nAuto-complete suggestions:")
-	for _, prefix := range prefixes {
-		suggestions := autocomplete.GetWordsWithPrefix(prefix)
-		fmt.Printf("Typing '%s': %v\n", prefix, suggestions)
+	// Look up definitions
+	fmt.Println("\nLooking up definitions:")
+	lookupWords := []string{"code", "coding", "coder", "algorithm", "programmer"}
+	for _, word := range lookupWords {
+		if def, found := definitionDict.SearchWithValue(word); found {
+			fmt.Printf("%s: %s\n", word, def)
+		} else {
+			fmt.Printf("%s: Not found in dictionary\n", word)
+		}
 	}
 
-	// Example 3: Dynamic Dictionary
-	fmt.Println("\nExample 3: Dynamic Dictionary")
-	fmt.Println("Demonstrating insertion and deletion")
+	// Example 3: Dynamic Dictionary Operations
+	fmt.Println("\nExample 3: Dynamic Dictionary Operations")
+	fmt.Println("Demonstrating insertion, deletion, and prefix operations")
 
-	// Create a new trie
-	dynamic := trie.NewTrie()
+	dynamicDict := trie.NewTrie()
 
-	// Insert words
-	fmt.Println("\nInserting words:")
-	dynamicWords := []string{"hello", "help", "helper", "helping"}
-	for _, word := range dynamicWords {
-		dynamic.Insert(word)
-		fmt.Printf("Inserted: %s\n", word)
+	// Step 1: Insert words
+	fmt.Println("\nStep 1: Inserting words")
+	initialWords := []string{"apple", "app", "apricot", "banana", "band"}
+	for _, word := range initialWords {
+		dynamicDict.Insert(word)
+		fmt.Printf("Added: %s\n", word)
 	}
 
-	// Show all words
-	fmt.Println("\nAll words in dictionary:", dynamic.GetAllWords())
+	// Step 2: Show all words with prefix
+	fmt.Println("\nStep 2: Words with prefix 'ap':")
+	apWords := dynamicDict.FindAllWithPrefix("ap")
+	fmt.Printf("Found %d words: %v\n", len(apWords), apWords)
 
-	// Delete some words
-	fmt.Println("\nDeleting words:")
-	deleteWords := []string{"helper", "hello"}
+	// Step 3: Delete some words
+	fmt.Println("\nStep 3: Deleting words")
+	deleteWords := []string{"app", "banana", "notexist"}
 	for _, word := range deleteWords {
-		success := dynamic.Delete(word)
-		fmt.Printf("Deleted '%s': %v\n", word, success)
+		deleted := dynamicDict.Delete(word)
+		fmt.Printf("Deleting '%s': %v\n", word, deleted)
 	}
 
-	// Show remaining words
-	fmt.Println("\nRemaining words:", dynamic.GetAllWords())
-
-	// Try to delete non-existent word
-	success := dynamic.Delete("nothere")
-	fmt.Printf("\nTried to delete non-existent word 'nothere': %v\n", success)
+	// Step 4: Show final dictionary state
+	fmt.Println("\nStep 4: Final dictionary state")
+	fmt.Printf("Dictionary size: %d\n", dynamicDict.Size())
+	fmt.Println("Words with prefix 'ap':", dynamicDict.FindAllWithPrefix("ap"))
+	fmt.Println("Words with prefix 'ban':", dynamicDict.FindAllWithPrefix("ban"))
 }

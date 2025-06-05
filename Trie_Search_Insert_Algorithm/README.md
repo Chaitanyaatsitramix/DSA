@@ -1,38 +1,36 @@
 # Trie (Prefix Tree) Algorithm
 
-A Trie is a tree-based data structure that provides efficient storage and retrieval of strings. It is particularly useful for implementing dictionaries, auto-complete systems, and prefix-based searches.
+A Trie, also called a prefix tree, is an efficient tree-like data structure for storing and retrieving strings. It excels at tasks involving prefix-based operations like autocomplete, spell checking, and IP routing.
 
 ## Overview
 
-The Trie structure organizes characters in a way that allows for quick prefix-based operations. Each node in the tree represents a character, and paths from root to leaf represent complete words.
+The Trie structure provides fast lookups and prefix-based operations by storing characters of strings in nodes, where each path from root to a marked node represents a word in the set.
 
 ### Time Complexity
 - Insert: O(m) where m is the length of the word
 - Search: O(m) where m is the length of the word
-- Prefix Search: O(p + n) where p is prefix length and n is number of child words
-
-### Space Complexity
-- O(ALPHABET_SIZE * m * n) where m is average word length and n is number of words
+- Prefix Search: O(p) where p is the length of the prefix
+- Space: O(ALPHABET_SIZE * m * n) where n is number of words
 
 ## Implementation Components
 
 1. **Node Structure**
-   - Character storage
-   - Child pointers
-   - Word completion marker
+   - Character map for children
+   - End of word marker
+   - Optional value storage
    - Prefix count tracking
 
 2. **Core Operations**
    - Insert word
    - Search word
    - Prefix search
-   - Word deletion
+   - Delete word
 
-3. **Helper Functions**
-   - Node creation
-   - Path traversal
-   - Word collection
-   - Count tracking
+3. **Advanced Features**
+   - Value association
+   - Prefix counting
+   - Word enumeration
+   - Dynamic updates
 
 ## Usage Examples
 
@@ -42,44 +40,52 @@ trie := NewTrie()
 
 // Insert words
 trie.Insert("cat")
-trie.Insert("catch")
-trie.Insert("caught")
+trie.Insert("car")
+trie.InsertWithValue("code", "computer instructions")
 
-// Search for words
-exists := trie.Search("cat")     // true
-exists = trie.Search("cap")      // false
-
-// Get words with prefix
-words := trie.GetWordsWithPrefix("cat") // ["cat", "catch", "caught"]
+// Search operations
+exists := trie.Search("cat")         // true
+hasPrefix := trie.StartsWith("ca")   // true
+count := trie.CountPrefix("ca")      // 2
+words := trie.FindAllWithPrefix("ca") // ["cat", "car"]
 ```
 
 ## Understanding the Algorithm
 
 ### Node Structure:
 ```
-TrieNode {
-    children: map[rune]*TrieNode
-    isEnd: bool
-    count: int
-    word: string
-}
+     root
+    /    \
+   c      d
+  /        \
+ a          o
+/  \         \
+t   r         g
 ```
 
-### Word Storage Example:
-```
-Root
- ↓
- c → a → t (cat*)
-         ↓
-         c → h (catch*)
-         ↓
-         u → g → h → t (caught*)
-```
-(*) marks end of word
+### Operations:
+
+1. **Insert**
+   ```
+   "cat" ->  c -> a -> t*
+   "car" ->  c -> a -> r*
+   (* marks word end)
+   ```
+
+2. **Search**
+   ```
+   "cat" -> follow path -> check end marker
+   "ca"  -> follow path -> check end marker
+   ```
+
+3. **Prefix Search**
+   ```
+   "ca" -> follow path -> collect all words below
+   ```
 
 ## Applications
 
-1. **Auto-complete Systems**
+1. **Autocomplete Systems**
    - Search suggestions
    - Type-ahead features
    - Command completion
@@ -89,79 +95,76 @@ Root
    - Suggestion generation
    - Error correction
 
-3. **Dictionary Implementation**
-   - Word lookup
-   - Prefix search
-   - Word counting
-
-4. **IP Routing Tables**
+3. **IP Routing**
    - Address lookup
    - Prefix matching
    - Route aggregation
 
+4. **Dictionary Implementation**
+   - Word storage
+   - Definition lookup
+   - Prefix-based search
+
 ## Edge Cases Handled
 
-- Empty strings
+- Empty string
 - Non-existent words
-- Overlapping prefixes
+- Prefix-only matches
+- Duplicate insertions
 - Case sensitivity
-- Special characters
 
 ## Implementation Details
 
-1. **Insert Operation**
-   - Character-by-character traversal
-   - Node creation as needed
-   - End-of-word marking
-   - Count increment
+1. **Memory Optimization**
+   - Compressed nodes
+   - Character maps
+   - Reference counting
 
-2. **Search Operation**
-   - Path following
-   - End node verification
-   - Null checking
-   - Count verification
+2. **Performance Features**
+   - Fast lookups
+   - Efficient prefix operations
+   - Memory-efficient storage
 
-3. **Delete Operation**
-   - Path traversal
-   - Node removal
-   - Reference cleanup
-   - Count update
+3. **Flexibility**
+   - Generic value storage
+   - Dynamic operations
+   - Custom character sets
 
 ## Common Use Cases
 
 1. **Text Editors**
-   - Auto-completion
-   - Spell checking
-   - Word suggestions
+   - Word completion
+   - Syntax highlighting
+   - Command suggestions
 
 2. **Search Engines**
    - Query suggestions
+   - Partial matching
    - Typeahead search
-   - Keyword matching
 
 3. **Games**
    - Word validation
-   - Command completion
-   - Name lookup
+   - Command processing
+   - Name matching
 
 4. **Natural Language Processing**
    - Word tokenization
    - Pattern matching
-   - Vocabulary management
+   - Dictionary operations
 
-## Performance Optimizations
+## Algorithm Variations
 
-1. **Memory Usage**
-   - Compressed nodes
-   - Character sharing
-   - Path compression
+1. **Compressed Trie**
+   - Merges single-child nodes
+   - Reduces memory usage
+   - Faster traversal
 
-2. **Search Speed**
-   - Early termination
-   - Path compression
-   - Count caching
+2. **Ternary Search Tree**
+   - Binary tree-like structure
+   - More space efficient
+   - Slower than standard trie
 
-3. **Insertion Efficiency**
-   - Batch processing
-   - Memory preallocation
-   - Path optimization 
+3. **Radix Tree**
+   - Compressed paths
+   - Variable-length nodes
+   - IP routing optimization 

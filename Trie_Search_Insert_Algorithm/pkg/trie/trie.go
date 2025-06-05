@@ -3,48 +3,67 @@ package trie
 // TrieNode represents a node in the Trie
 type TrieNode struct {
 	children map[rune]*TrieNode // Map of child nodes
-	isEnd    bool               // Marks end of a word
-	count    int                // Number of words with this prefix
-	word     string             // Complete word (only set for end nodes)
+	isEnd    bool               // Marks if this node represents end of a word
+	value    interface{}        // Optional value associated with the word
+	count    int                // Number of words that pass through this node
 }
 
-// NewTrieNode creates a new TrieNode
-func NewTrieNode() *TrieNode {
-	return &TrieNode{
-		children: make(map[rune]*TrieNode),
-		isEnd:    false,
-		count:    0,
-	}
-}
-
-// Trie represents the prefix tree
+// Trie represents a prefix tree data structure
 type Trie struct {
 	root *TrieNode
+	size int // Total number of words in the trie
 }
 
 // NewTrie creates a new Trie
 func NewTrie() *Trie {
 	return &Trie{
-		root: NewTrieNode(),
+		root: &TrieNode{
+			children: make(map[rune]*TrieNode),
+		},
 	}
 }
 
 // Insert adds a word to the trie
 func (t *Trie) Insert(word string) {
 	node := t.root
+	node.count++
 
-	// Traverse/create the path for each character
 	for _, ch := range word {
-		if _, exists := node.children[ch]; !exists {
-			node.children[ch] = NewTrieNode()
+		if node.children[ch] == nil {
+			node.children[ch] = &TrieNode{
+				children: make(map[rune]*TrieNode),
+			}
 		}
 		node = node.children[ch]
 		node.count++
 	}
 
-	// Mark the end of the word
+	if !node.isEnd {
+		node.isEnd = true
+		t.size++
+	}
+}
+
+// InsertWithValue adds a word with an associated value
+func (t *Trie) InsertWithValue(word string, value interface{}) {
+	node := t.root
+	node.count++
+
+	for _, ch := range word {
+		if node.children[ch] == nil {
+			node.children[ch] = &TrieNode{
+				children: make(map[rune]*TrieNode),
+			}
+		}
+		node = node.children[ch]
+		node.count++
+	}
+
+	if !node.isEnd {
+		t.size++
+	}
 	node.isEnd = true
-	node.word = word
+	node.value = value
 }
 
 // Search returns true if the word exists in the trie
@@ -53,79 +72,35 @@ func (t *Trie) Search(word string) bool {
 	return node != nil && node.isEnd
 }
 
-// StartsWith returns true if there is any word that starts with the prefix
+// SearchWithValue returns the value associated with the word and true if found
+func (t *Trie) SearchWithValue(word string) (interface{}, bool) {
+	node := t.searchNode(word)
+	if node != nil && node.isEnd {
+		return node.value, true
+	}
+	return nil, false
+}
+
+// searchNode returns the node for the last character of the word
+func (t *Trie) searchNode(word string) *TrieNode {
+	node := t.root
+
+	for _, ch := range word {
+		if node.children[ch] == nil {
+			return nil
+		}
+		node = node.children[ch]
+	}
+	return node
+}
+
+// StartsWith returns true if there is any word in the trie that starts with the given prefix
 func (t *Trie) StartsWith(prefix string) bool {
 	return t.searchNode(prefix) != nil
 }
 
-// searchNode returns the node for the last character of the word/prefix
-func (t *Trie) searchNode(str string) *TrieNode {
-	node := t.root
-
-	for _, ch := range str {
-		if next, exists := node.children[ch]; exists {
-			node = next
-		} else {
-			return nil
-		}
-	}
-
-	return node
-}
-
-// GetWordsWithPrefix returns all words that start with the given prefix
-func (t *Trie) GetWordsWithPrefix(prefix string) []string {
-	node := t.searchNode(prefix)
-	if node == nil {
-		return nil
-	}
-
-	words := make([]string, 0)
-	t.collectWords(node, &words)
-	return words
-}
-
-// collectWords recursively collects all words under the given node
-func (t *Trie) collectWords(node *TrieNode, words *[]string) {
-	if node.isEnd {
-		*words = append(*words, node.word)
-	}
-
-	for _, child := range node.children {
-		t.collectWords(child, words)
-	}
-}
-
-// Delete removes a word from the trie
-func (t *Trie) Delete(word string) bool {
-	return t.deleteHelper(t.root, word, 0)
-}
-
-// deleteHelper recursively removes a word from the trie
-func (t *Trie) deleteHelper(node *TrieNode, word string, depth int) bool {
-	// If we've processed all characters
-	if depth == len(word) {
-		if !node.isEnd {
-			return false // Word not found
-		}
-		node.isEnd = false
-		node.word = ""
-		return len(node.children) == 0
-	}
-
-	ch := rune(word[depth])
-	if child, exists := node.children[ch]; exists {
-		shouldDeleteChild := t.deleteHelper(child, word, depth+1)
-		if shouldDeleteChild {
-			delete(node.children, ch)
-			return len(node.children) == 0 && !node.isEnd
-		}
-	}
-	return false
-}
-
-// GetCount returns the number of words with the given prefix
-func (t *Trie) GetCount(prefix string) int {
+// CountPrefix returns the number of words that start with the given prefix
+func (t *Trie) CountPrefix(prefix string) int {
 	node := t.searchNode(prefix)
 	if node == nil {
 		return 0
@@ -133,9 +108,70 @@ func (t *Trie) GetCount(prefix string) int {
 	return node.count
 }
 
-// GetAllWords returns all words in the trie
-func (t *Trie) GetAllWords() []string {
+// Size returns the total number of words in the trie
+func (t *Trie) Size() int {
+	return t.size
+}
+
+// FindAllWithPrefix returns all words that start with the given prefix
+func (t *Trie) FindAllWithPrefix(prefix string) []string {
+	node := t.searchNode(prefix)
+	if node == nil {
+		return nil
+	}
+
 	words := make([]string, 0)
-	t.collectWords(t.root, &words)
+	t.findAllWithPrefixUtil(node, prefix, &words)
 	return words
+}
+
+// findAllWithPrefixUtil is a recursive helper function for FindAllWithPrefix
+func (t *Trie) findAllWithPrefixUtil(node *TrieNode, prefix string, words *[]string) {
+	if node.isEnd {
+		*words = append(*words, prefix)
+	}
+
+	for ch, child := range node.children {
+		t.findAllWithPrefixUtil(child, prefix+string(ch), words)
+	}
+}
+
+// Delete removes a word from the trie
+// Returns true if the word was found and deleted
+func (t *Trie) Delete(word string) bool {
+	if len(word) == 0 {
+		return false
+	}
+	return t.deleteUtil(t.root, word, 0)
+}
+
+// deleteUtil is a recursive helper function for Delete
+func (t *Trie) deleteUtil(node *TrieNode, word string, depth int) bool {
+	if node == nil {
+		return false
+	}
+
+	// If we've reached the end of the word
+	if depth == len(word) {
+		if !node.isEnd {
+			return false
+		}
+		node.isEnd = false
+		t.size--
+		return len(node.children) == 0
+	}
+
+	ch := rune(word[depth])
+	child := node.children[ch]
+
+	shouldDeleteChild := t.deleteUtil(child, word, depth+1)
+
+	if shouldDeleteChild {
+		delete(node.children, ch)
+		node.count--
+		return len(node.children) == 0 && !node.isEnd
+	}
+
+	node.count--
+	return false
 }
