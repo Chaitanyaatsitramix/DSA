@@ -307,3 +307,4 @@ func main() {
 	// Element not found
 	fmt.Printf("Search 100 in %v: %d\n", sortedArray, BinarySearch(sortedArray, 100))
 }
+ 

@@ -29,72 +29,68 @@ This repository documents a comprehensive learning journey through fundamental D
 - ✅ Applications in substring and subarray problems
 
 #### 3. Merge Intervals Algorithm
-**Prompt 4:** *Context about Merge Intervals Algorithm*
+**Prompt 4:** *"Tell me about Merge Intervals Algorithm"*
 - ✅ Algorithm for merging overlapping intervals
 - ✅ Sorting-based approach with O(n log n) complexity
 - ✅ Real-world applications in scheduling and time management
+
+#### 4. Kadane's Algorithm
+**Prompt 5:** *"Tell me about Kadane's Algorithm"*
+- ✅ Maximum subarray sum problem solution
+- ✅ Dynamic programming approach
+- ✅ O(n) time complexity implementation
+- ✅ Applications in array processing
 
 ---
 
 ### Day 2: Search Algorithms
 
-#### 4. Binary Search Algorithm
-**Prompt 5:** *"tell me about Binary Search Algorithm"*
-- ✅ Created new Git branch "Day-2"
-- ✅ Comprehensive guide with 8+ variations:
+#### 5. Binary Search Algorithm
+**Prompt 6:** *"tell me about Binary Search Algorithm"*
+- ✅ Comprehensive guide with variations:
   - Standard Binary Search (iterative & recursive)
   - Lower Bound & Upper Bound
   - Search Range & Rotated Array Search
   - Peak Element & Square Root algorithms
 - ✅ Complete implementations in `binary_search.go`
-- ✅ Extensive test suite with edge cases
-- ✅ Performance benchmarks showing iterative ~38% faster than recursive
-
-**Prompt 6:** *"run tests for the binary search implementations"*
-- ✅ Executed `go test -v` - All 9 tests passed successfully
-- ✅ Validated correctness of all binary search variations
-
-**Prompt 7:** *"run benchmark tests to evaluate performance"*
-- ✅ Executed `go test -bench=.` 
-- ✅ Results: Iterative (17.94 ns/op) vs Recursive (28.95 ns/op)
-- ✅ Performance analysis and optimization insights
+- ✅ Test suite with edge cases
+- ✅ Performance benchmarks
 
 ---
 
-### Day 3: Graph Traversal Algorithms
+### Day 3: Graph and Selection Algorithms
 
-#### 5. Depth-First Search (DFS) Algorithm
-**Prompt 8:** *"tell me about Depth-First Search Algorithm"*
+#### 6. Depth-First Search (DFS) Algorithm
+**Prompt 7:** *"tell me about Depth-First Search Algorithm"*
 - ✅ Comprehensive DFS guide covering:
-  - Stack-based implementations (recursive & iterative)
-  - Tree traversals (Pre/In/Post-order)
+  - Stack-based implementations
+  - Tree traversals
   - Path finding algorithms
-  - Cycle detection (directed & undirected graphs)
-  - Connected components analysis
+  - Cycle detection
+  - Connected components
   - Topological sorting
 
-**Prompt 9:** *"create comprehensive Go implementation files for DFS"*
-- ✅ Created `dfs_implementation.go` with 15+ functions:
-  - Basic DFS (recursive, iterative, custom stack)
-  - Tree traversals with multiple approaches
-  - Advanced applications (pathfinding, cycle detection)
-  - Graph connectivity and component analysis
-  - Debugging utilities with depth tracking
+#### 7. Breadth-First Search (BFS) Algorithm
+**Prompt 8:** *"tell me about Breadth First Search Algorithm"*
+- ✅ Complete BFS implementation with:
+  - Queue-based approach
+  - Level-order traversal
+  - Shortest path finding
+  - Distance tracking
+  - Multi-source BFS
+- ✅ Practical examples and applications
 
-**Prompt 10:** *"create comprehensive test cases for all DFS implementations"*
-- ✅ Created `dfs_test.go` with:
-  - 16 comprehensive test functions
-  - 6 benchmark functions  
-  - Edge case handling (empty graphs, large graphs)
-  - Performance testing up to 1000 nodes
-  - Memory allocation tracking
-
-**Prompt 11:** *"run the main program to demonstrate DFS implementations"*
-- ✅ Executed `go run .` successfully
-- ✅ Demonstrated all DFS variations with sample outputs
-- ✅ Verified correctness of all implementations
-
----
+#### 8. Quickselect Algorithm
+**Prompt 9:** *"explain me what is Quickselect_Algorithm and its methods in Array with example"*
+- ✅ Comprehensive implementation with:
+  - Basic Quickselect with O(n) average case complexity
+  - Median of Medians for guaranteed O(n) worst case
+  - Lomuto's partitioning scheme
+  - Edge case handling
+- ✅ Example applications:
+  - Finding kth smallest element
+  - Finding median in unsorted array
+  - Handling arrays with duplicates
 
 ## Repository Structure
 
@@ -104,68 +100,80 @@ DSA/
 ├── go.mod                             # Go module configuration
 ├── Binary_Search_Algorithm/           # Day 2 - Search Algorithms
 │   ├── Binary_Search_Algorithm.md     # Theoretical guide
-│   ├── binary_search.go              # 8 search implementations
-│   └── binary_search_test.go         # Comprehensive test suite
+│   ├── binary_search.go              # Search implementations
+│   └── binary_search_test.go         # Test suite
+├── Breadth_First_Search_Algorithm/    # Day 3 - Graph Traversal
+│   ├── Breadth_First_Search_Algorithm.md # Algorithm guide
+│   ├── bfs/                          # Core BFS package
+│   │   ├── bfs.go                    # BFS implementation
+│   │   └── bfs_test.go              # BFS tests
+│   ├── cmd/                          # Example programs
+│   │   └── bfs_demo/
+│   │       └── main.go              # Demo program
+│   └── go.mod                        # Module configuration
 ├── Depth_First_Search_Algorithm/      # Day 3 - Graph Traversal
-│   ├── Depth_First_Search_Algorithm.md # 45+ section guide
-│   ├── dfs_implementation.go         # 15+ DFS functions
-│   └── dfs_test.go                   # 16 tests + 6 benchmarks
+│   ├── Depth_First_Search_Algorithm.md # Algorithm guide
+│   ├── dfs_implementation.go         # DFS implementation
+│   └── dfs_test.go                   # DFS tests
 ├── Two_Pointer_algorithm/             # Day 1 - Pointer Techniques
+│   ├── Two_Pointer_algorithm.md      # Algorithm guide
+│   ├── go.mod                        # Module configuration
+│   ├── main.go                       # Example program
+│   ├── opposite_direction.go         # Two-pointer implementation
+│   └── same_direction.go             # Two-pointer implementation
 ├── Sliding_Window_algorithm/          # Day 1 - Window Techniques
+│   ├── SLIDING_WINDOW.md             # Algorithm guide
+│   ├── go.mod                        # Module configuration
+│   ├── main.go                       # Example program
+│   ├── Fixed_Size_window.go          # Fixed window implementation
+│   └── Variable Size_Window.go       # Variable window implementation
 ├── Merge_Intervals_Algorithm/         # Day 1 - Interval Processing
-└── Kadane's_Algorithm/               # Day 1 - Dynamic Programming
+│   ├── Merge_Intervals_Algorithm.md  # Algorithm guide
+│   ├── go.mod                        # Module configuration
+│   ├── main.go                       # Example program
+│   └── merge_intervals.go            # Implementation
+├── Kadane's_Algorithm/               # Day 1 - Dynamic Programming
+│   ├── KADANES_ALGORITHM.md          # Algorithm guide
+│   ├── go.mod                        # Module configuration
+│   ├── main.go                       # Example program
+│   └── kadanes_algorithm.go          # Implementation
+└── Quickselect_Algorithm/            # Day 3 - Selection Algorithm
+    ├── README.md                     # Algorithm guide
+    ├── go.mod                        # Module configuration
+    ├── quickselect.go               # Core implementation
+    └── examples/                    # Example programs
+        └── main.go                  # Demo program
 ```
 
 ## Key Learning Outcomes
 
 ### 🎯 **Algorithm Mastery**
-- **Binary Search**: O(log n) search efficiency with 8 practical variations
-- **DFS Traversal**: Stack-based graph exploration with multiple applications
-- **Two-Pointer**: O(n) linear scanning techniques for array problems
+- **Binary Search**: O(log n) search efficiency with variations
+- **DFS & BFS**: Graph traversal with multiple applications
+- **Two-Pointer**: O(n) linear scanning techniques
 - **Sliding Window**: Efficient substring/subarray problem solving
+- **Merge Intervals**: O(n log n) interval processing
+- **Kadane's Algorithm**: O(n) dynamic programming approach
+- **Quickselect**: O(n) selection algorithm with deterministic variant
 
 ### 🧪 **Testing Excellence**
-- Comprehensive test coverage for all implementations
-- Edge case handling and boundary testing
-- Performance benchmarking and optimization analysis
-- Large dataset performance validation (up to 1000 nodes)
+- Comprehensive test coverage
+- Edge case handling
+- Performance benchmarking
+- Large dataset validation
 
 ### ⚡ **Performance Insights**
-- **Binary Search**: Iterative 38% faster than recursive (17.94ns vs 28.95ns)
-- **DFS Recursive**: ~807K ops/sec with 0 allocations
-- **DFS Iterative**: ~61K ops/sec with 2 allocations per operation
-- **Memory Optimization**: Explicit stack management vs recursion trade-offs
-
-### 🔧 **Implementation Patterns**
-- **Recursive vs Iterative**: When to choose each approach
-- **Stack Management**: Custom vs built-in stack implementations  
-- **Graph Representations**: Adjacency lists vs matrices
-- **Error Handling**: Graceful edge case management
-
-## Next Steps & Advanced Topics
-
-### 🚀 **Potential Future Algorithms**
-- Breadth-First Search (BFS) and shortest path algorithms
-- Dynamic Programming (Knapsack, LCS, Edit Distance)
-- Advanced Tree Algorithms (AVL, Red-Black, Segment Trees)
-- Graph Algorithms (Dijkstra, Floyd-Warshall, MST)
-- String Algorithms (KMP, Rabin-Karp, Suffix Arrays)
-
-### 📊 **Advanced Analysis**
-- Amortized complexity analysis
-- Space-time trade-off optimization
-- Parallel algorithm implementations
-- Real-world application case studies
-
----
+- Time complexity analysis for each algorithm
+- Space complexity considerations
+- Optimization techniques
+- Trade-off analysis
 
 ## Usage Instructions
 
 ### Running Tests
 ```bash
 # Test specific algorithm
-cd Binary_Search_Algorithm && go test -v
-cd Depth_First_Search_Algorithm && go test -v
+cd Algorithm_Directory && go test -v
 
 # Run benchmarks
 go test -bench=.
@@ -176,35 +184,17 @@ go test -cover
 
 ### Running Demonstrations
 ```bash
-# DFS demonstrations
-cd Depth_First_Search_Algorithm && go run .
-
-# Binary Search examples  
-cd Binary_Search_Algorithm && go run .
+# Run any algorithm example
+cd Algorithm_Directory && go run .
 ```
 
-## Git Workflow
-- **Main Branch**: Stable implementations with documentation
-- **Day-2 Branch**: Binary search algorithm development
-- **Continuous Integration**: All tests must pass before merging
-
----
-
 ## Learning Philosophy
-
-This repository demonstrates a **systematic approach** to algorithm learning:
-
-1. **Theoretical Understanding**: Comprehensive guides with visual examples
-2. **Multiple Implementations**: Different approaches for the same problem
-3. **Comprehensive Testing**: Edge cases, performance, and correctness
-4. **Performance Analysis**: Benchmarking and optimization insights
-5. **Real-world Applications**: Practical problem-solving scenarios
-
-Each algorithm includes **complete documentation**, **tested implementations**, and **performance benchmarks** to ensure both understanding and practical applicability.
-
-**Total Learning Time**: ~3 days of intensive algorithm study and implementation
-**Code Quality**: Production-ready with comprehensive test coverage
-**Documentation**: Beginner-friendly with advanced insights included
+This repository demonstrates a systematic approach to algorithm learning:
+1. Theoretical Understanding
+2. Multiple Implementations
+3. Comprehensive Testing
+4. Performance Analysis
+5. Real-world Applications
 
 ---
 
